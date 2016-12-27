@@ -4,6 +4,7 @@ import com.esotericsoftware.kryo.io.{ Input, Output }
 import com.esotericsoftware.kryo.{ Kryo, Serializer }
 import htsjdk.samtools.TextCigarCodec
 import org.hammerlab.genomics.bases.Bases
+import org.hammerlab.genomics.reference.Locus
 
 // Serialization: MappedRead
 class MappedReadSerializer extends Serializer[MappedRead] {
@@ -45,7 +46,7 @@ class MappedReadSerializer extends Serializer[MappedRead] {
       isDuplicate,
       referenceContig,
       alignmentQuality,
-      start,
+      Locus(start),
       cigar,
       failedVendorQualityChecks,
       isPositiveStrand,

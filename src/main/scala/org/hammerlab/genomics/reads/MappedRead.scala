@@ -3,10 +3,10 @@ package org.hammerlab.genomics.reads
 import htsjdk.samtools.{ Cigar, CigarElement }
 import org.bdgenomics.adam.util.PhredUtils.phredToSuccessProbability
 import org.hammerlab.genomics.bases.Bases
-import org.hammerlab.genomics.reference.{ ContigName, Locus, Region, WindowSize }
 import org.hammerlab.genomics.cigar.Element
+import org.hammerlab.genomics.reference.{ ContigName, Locus, Region, WindowSize }
 
-import scala.collection.{ JavaConversions, mutable }
+import scala.collection.JavaConversions
 
 /**
  * A mapped read. See the [[Read]] trait for some of the field descriptions.

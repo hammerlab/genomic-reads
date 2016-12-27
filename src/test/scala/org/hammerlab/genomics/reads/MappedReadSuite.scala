@@ -1,9 +1,12 @@
 package org.hammerlab.genomics.reads
 
 import htsjdk.samtools.TextCigarCodec
+import org.hammerlab.genomics.reference.test.LocusUtil
 import org.hammerlab.test.Suite
 
-class MappedReadSuite extends Suite {
+class MappedReadSuite
+  extends Suite
+    with LocusUtil {
 
   test("mappedread is mapped") {
     val read = MappedRead(

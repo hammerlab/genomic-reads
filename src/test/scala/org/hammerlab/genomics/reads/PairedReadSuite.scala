@@ -1,9 +1,12 @@
 package org.hammerlab.genomics.reads
 
 import htsjdk.samtools.TextCigarCodec
+import org.hammerlab.genomics.reference.test.LocusUtil
 import org.hammerlab.test.Suite
 
-class PairedReadSuite extends Suite {
+class PairedReadSuite
+  extends Suite
+    with LocusUtil {
 
   test("unmappedread paired read is not mapped") {
     val unmappedRead =
@@ -24,7 +27,7 @@ class PairedReadSuite extends Suite {
           MateAlignmentProperties(
             inferredInsertSize = Some(300),
             contigName = "chr5",
-            start = 100L,
+            start = 100,
             isPositiveStrand = false
           )
         )
@@ -53,7 +56,7 @@ class PairedReadSuite extends Suite {
           MateAlignmentProperties(
             inferredInsertSize = Some(300),
             contigName = "chr5",
-            start = 100L,
+            start = 100,
             isPositiveStrand = false
           )
         )
@@ -79,7 +82,7 @@ class PairedReadSuite extends Suite {
           MateAlignmentProperties(
             inferredInsertSize = Some(300),
             contigName = "chr5",
-            start = 100L,
+            start = 100,
             isPositiveStrand = false
           )
         )
