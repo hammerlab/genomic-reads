@@ -8,7 +8,7 @@ class UnmappedReadSerializerSuite
       UnmappedRead(
         "read1",
         "TCGACCCTCGA",
-        Array((10 to 20).map(_.toByte): _*),
+        (10 to 20).map(_.toByte).toArray,
         isDuplicate = true,
         failedVendorQualityChecks = false,
         isPaired = true

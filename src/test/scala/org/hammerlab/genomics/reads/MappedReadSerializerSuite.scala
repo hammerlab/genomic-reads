@@ -11,7 +11,7 @@ class MappedReadSerializerSuite
       MappedRead(
         "read1",
         "TCGACCCTCGA",
-        Array((10 to 20).map(_.toByte): _*),
+        (10 to 20).map(_.toByte).toArray,
         isDuplicate = true,
         "chr5",
         50,
@@ -30,7 +30,7 @@ class MappedReadSerializerSuite
       MappedRead(
         "read1",
         "TCGACCCTCGA",
-        Array((10 to 20).map(_.toByte): _*),
+        (10 to 20).map(_.toByte).toArray,
         isDuplicate = true,
         "chr5",
         50,
@@ -48,7 +48,7 @@ class MappedReadSerializerSuite
     val read = MappedRead(
       "read1",
       "TCGACCCTCGA",
-      Array((10 to 20).map(_.toByte): _*),
+      (10 to 20).map(_.toByte).toArray,
       isDuplicate = true,
       "chr5",
       50,
