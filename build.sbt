@@ -2,19 +2,16 @@ organization := "org.hammerlab.genomics"
 name := "reads"
 version := "1.0.0-SNAPSHOT"
 
-libraryDependencies ++= Seq(
-  libraries.value('adam_core),
-  libraries.value('bdg_formats),
-  libraries.value('genomic_utils),
-  libraries.value('htsjdk),
-  libraries.value('kryo),
-  libraries.value('loci),
-  libraries.value('slf4j)
+addSparkDeps
+publishTestJar
+
+deps ++= Seq(
+  libs.value('adam_core),
+  libs.value('bdg_formats),
+  libs.value('genomic_utils),
+  libs.value('htsjdk),
+  libs.value('loci),
+  libs.value('reference),
+  libs.value('slf4j)
 )
 
-providedDeps += libraries.value('spark)
-
-testDeps ++= Seq(
-  libraries.value('spark_tests),
-  libraries.value('test_utils)
-)

@@ -14,7 +14,7 @@ trait ReadsUtil {
                    isDuplicate: Boolean = false,
                    contigName: ContigName = "",
                    alignmentQuality: Int = -1,
-                   start: Locus = -1L,
+                   start: Int = -1,
                    cigarString: String = "",
                    failedVendorQualityChecks: Boolean = false,
                    isPositiveStrand: Boolean = true,
@@ -30,7 +30,7 @@ trait ReadsUtil {
       isDuplicate,
       contigName,
       alignmentQuality,
-      start,
+      Locus(start),
       cigar,
       failedVendorQualityChecks,
       isPositiveStrand,
@@ -45,7 +45,7 @@ trait ReadsUtil {
 
   def makeRead(sequence: String,
                cigar: String,
-               start: Locus,
+               start: Int,
                chr: ContigName,
                qualityScores: Seq[Int]): MappedRead =
     makeRead(
@@ -58,7 +58,7 @@ trait ReadsUtil {
 
   def makeRead(sequence: String,
                cigar: String = "",
-               start: Locus = 1,
+               start: Int = 1,
                chr: ContigName = "chr1",
                qualityScores: Option[Seq[Int]] = None,
                alignmentQuality: Int = 30): MappedRead = {
@@ -81,7 +81,7 @@ trait ReadsUtil {
   }
 
   def makePairedRead(chr: ContigName = "chr1",
-                     start: Locus = 1,
+                     start: Int = 1,
                      alignmentQuality: Int = 30,
                      isPositiveStrand: Boolean = true,
                      isMateMapped: Boolean = false,

@@ -4,6 +4,7 @@ import grizzled.slf4j.Logging
 import htsjdk.samtools._
 import org.bdgenomics.formats.avro.AlignmentRecord
 import org.hammerlab.genomics.bases.Bases
+import org.hammerlab.genomics.reference.Locus
 
 /**
  * The fields in the Read trait are common to any read, whether mapped (aligned) or not.
@@ -73,7 +74,8 @@ object Read extends Logging {
             record.getDuplicateReadFlag,
             record.getReferenceName.intern,
             record.getMappingQuality,
-            record.getAlignmentStart - 1,
+            // SAM loci are 1-indexed
+            Locus(record.getAlignmentStart - 1),
             cigar = record.getCigar,
             failedVendorQualityChecks = record.getReadFailsVendorQualityCheckFlag,
             isPositiveStrand = !record.getReadNegativeStrandFlag,
@@ -81,9 +83,9 @@ object Read extends Logging {
           )
 
         // We subtract 1 from start, since samtools is 1-based and we're 0-based.
-        if (result.unclippedStart != record.getUnclippedStart - 1)
+        if (result.unclippedStart.locus != record.getUnclippedStart - 1)
           warn(
-            "Computed read 'unclippedStart' %d != samtools read end %d.".format(
+            "Computed read 'unclippedStart' %s != samtools read end %d.".format(
               result.unclippedStart, record.getUnclippedStart - 1
             )
           )
@@ -131,7 +133,7 @@ object Read extends Logging {
           isDuplicate = alignmentRecord.getDuplicateRead,
           contigName = referenceContig,
           alignmentQuality = alignmentRecord.getMapq,
-          start = alignmentRecord.getStart,
+          start = Locus(alignmentRecord.getStart),
           cigar = cigar,
           failedVendorQualityChecks = alignmentRecord.getFailedVendorQualityChecks,
           isPositiveStrand = !alignmentRecord.getReadNegativeStrand,
@@ -155,7 +157,7 @@ object Read extends Logging {
           Some(
             MateAlignmentProperties(
               contigName = alignmentRecord.getMateContigName.intern(),
-              start = alignmentRecord.getMateAlignmentStart,
+              start = Locus(alignmentRecord.getMateAlignmentStart),
               inferredInsertSize =
                 if (inferredInsertSize != 0 && inferredInsertSize != null)
                   Some(inferredInsertSize.toInt)

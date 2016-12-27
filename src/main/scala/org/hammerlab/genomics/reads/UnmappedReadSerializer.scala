@@ -8,8 +8,8 @@ import org.hammerlab.genomics.bases.Bases
 class UnmappedReadSerializer extends Serializer[UnmappedRead] {
   def write(kryo: Kryo, output: Output, obj: UnmappedRead) = {
     output.writeString(obj.name)
-    assert(obj.sequence.length == obj.baseQualities.length)
-    kryo.writeClassAndObject(output, obj.sequence)
+    assert(obj.sequence.length.size == obj.baseQualities.length)
+    kryo.writeObject(output, obj.sequence)
     output.writeBytes(obj.baseQualities.toArray)
     output.writeBoolean(obj.isDuplicate)
     output.writeBoolean(obj.failedVendorQualityChecks)
@@ -19,7 +19,7 @@ class UnmappedReadSerializer extends Serializer[UnmappedRead] {
 
   def read(kryo: Kryo, input: Input, klass: Class[UnmappedRead]): UnmappedRead = {
     val name: String = input.readString()
-    val sequence: Bases = kryo.readClassAndObject(input).asInstanceOf[Bases]
+    val sequence: Bases = kryo.readObject(input, classOf[Bases])
     val qualityScoresArray = input.readBytes(sequence.length).toVector
     val isDuplicate = input.readBoolean()
     val failedVendorQualityChecks = input.readBoolean()

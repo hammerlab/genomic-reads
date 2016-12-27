@@ -15,13 +15,13 @@ case class PairedRead[+T <: Read](read: T,
                                   mateAlignmentProperties: Option[MateAlignmentProperties])
   extends Read {
 
-  val isMateMapped = mateAlignmentProperties.isDefined
-  override val name: String = read.name
-  override val failedVendorQualityChecks: Boolean = read.failedVendorQualityChecks
-  override val baseQualities: IndexedSeq[Byte] = read.baseQualities
-  override val isDuplicate: Boolean = read.isDuplicate
-  override val sequence: Bases = read.sequence
-  override val isPaired: Boolean = true
-  override val isMapped = read.isMapped
-  override def asMappedRead = read.asMappedRead
+  @transient val isMateMapped = mateAlignmentProperties.isDefined
+  @transient override val name: String = read.name
+  @transient override val failedVendorQualityChecks: Boolean = read.failedVendorQualityChecks
+  @transient override val baseQualities: IndexedSeq[Byte] = read.baseQualities
+  @transient override val isDuplicate: Boolean = read.isDuplicate
+  @transient override val sequence: Bases = read.sequence
+  @transient override val isPaired: Boolean = true
+  @transient override val isMapped = read.isMapped
+  @transient override def asMappedRead = read.asMappedRead
 }

@@ -10,13 +10,13 @@ class MappedReadSerializer extends Serializer[MappedRead] {
 
   def write(kryo: Kryo, output: Output, obj: MappedRead) = {
     output.writeString(obj.name)
-    assert(obj.sequence.length == obj.baseQualities.length)
-    kryo.writeClassAndObject(output, obj.sequence)
+    assert(obj.sequence.length.size == obj.baseQualities.length)
+    kryo.writeObject(output, obj.sequence)
     output.writeBytes(obj.baseQualities.toArray)
     output.writeBoolean(obj.isDuplicate)
-    output.writeString(obj.contigName)
+    output.writeString(obj.contigName.name)
     output.writeInt(obj.alignmentQuality, true)
-    output.writeLong(obj.start, true)
+    output.writeLong(obj.start.locus, true)
     output.writeString(obj.cigar.toString)
     output.writeBoolean(obj.failedVendorQualityChecks)
     output.writeBoolean(obj.isPositiveStrand)
@@ -25,7 +25,7 @@ class MappedReadSerializer extends Serializer[MappedRead] {
 
   def read(kryo: Kryo, input: Input, klass: Class[MappedRead]): MappedRead = {
     val name = input.readString()
-    val sequence = kryo.readClassAndObject(input).asInstanceOf[Bases]
+    val sequence = kryo.readObject[Bases](input, classOf[Bases])
     val qualityScoresArray: IndexedSeq[Byte] = input.readBytes(sequence.length).toVector
     val isDuplicate = input.readBoolean()
     val referenceContig = input.readString().intern()
