@@ -1,6 +1,7 @@
 package org.hammerlab.genomics.reads
 
 import org.hammerlab.genomics.bases.Bases
+import org.scalautils.ConversionCheckedTripleEquals._
 
 /**
  * An unmapped read. See the [[Read]] trait for field descriptions.
@@ -14,7 +15,7 @@ case class UnmappedRead(
     failedVendorQualityChecks: Boolean,
     isPaired: Boolean) extends Read {
 
-  assert(baseQualities.length == sequence.length.size)
+  assert(baseQualities.length === sequence.length.size)
 
   override val isMapped = false
   override def asMappedRead = None

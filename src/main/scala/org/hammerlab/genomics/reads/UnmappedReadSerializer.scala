@@ -3,12 +3,13 @@ package org.hammerlab.genomics.reads
 import com.esotericsoftware.kryo.io.{ Input, Output }
 import com.esotericsoftware.kryo.{ Kryo, Serializer }
 import org.hammerlab.genomics.bases.Bases
+import org.scalautils.ConversionCheckedTripleEquals._
 
 // Serialization: UnmappedRead
 class UnmappedReadSerializer extends Serializer[UnmappedRead] {
   def write(kryo: Kryo, output: Output, obj: UnmappedRead) = {
     output.writeString(obj.name)
-    assert(obj.sequence.length.size == obj.baseQualities.length)
+    assert(obj.sequence.length.size === obj.baseQualities.length)
     kryo.writeObject(output, obj.sequence)
     output.writeBytes(obj.baseQualities.toArray)
     output.writeBoolean(obj.isDuplicate)

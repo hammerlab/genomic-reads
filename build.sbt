@@ -12,6 +12,7 @@ deps ++= Seq(
   libs.value('htsjdk),
   libs.value('loci),
   libs.value('reference),
+  libs.value('scalautils),
   libs.value('slf4j)
 )
 

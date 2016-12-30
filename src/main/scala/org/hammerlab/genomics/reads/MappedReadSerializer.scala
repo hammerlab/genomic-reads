@@ -5,13 +5,14 @@ import com.esotericsoftware.kryo.{ Kryo, Serializer }
 import htsjdk.samtools.TextCigarCodec
 import org.hammerlab.genomics.bases.Bases
 import org.hammerlab.genomics.reference.Locus
+import org.scalautils.ConversionCheckedTripleEquals._
 
 // Serialization: MappedRead
 class MappedReadSerializer extends Serializer[MappedRead] {
 
   def write(kryo: Kryo, output: Output, obj: MappedRead) = {
     output.writeString(obj.name)
-    assert(obj.sequence.length.size == obj.baseQualities.length)
+    assert(obj.sequence.length.size === obj.baseQualities.length)
     kryo.writeObject(output, obj.sequence)
     output.writeBytes(obj.baseQualities.toArray)
     output.writeBoolean(obj.isDuplicate)

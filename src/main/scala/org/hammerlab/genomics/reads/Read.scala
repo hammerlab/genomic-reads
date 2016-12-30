@@ -5,6 +5,7 @@ import htsjdk.samtools._
 import org.bdgenomics.formats.avro.AlignmentRecord
 import org.hammerlab.genomics.bases.Bases
 import org.hammerlab.genomics.reference.Locus
+import org.scalautils.ConversionCheckedTripleEquals._
 
 /**
  * The fields in the Read trait are common to any read, whether mapped (aligned) or not.
@@ -83,11 +84,9 @@ object Read extends Logging {
           )
 
         // We subtract 1 from start, since samtools is 1-based and we're 0-based.
-        if (result.unclippedStart.locus != record.getUnclippedStart - 1)
+        if (result.unclippedStart !== Locus(record.getUnclippedStart - 1))
           warn(
-            "Computed read 'unclippedStart' %s != samtools read end %d.".format(
-              result.unclippedStart, record.getUnclippedStart - 1
-            )
+            s"Computed read 'unclippedStart' ${result.unclippedStart} != samtools read start ${record.getUnclippedStart - 1}: $result"
           )
 
         result
