@@ -1,14 +1,12 @@
 package org.hammerlab.genomics.reads
 
 import htsjdk.samtools.{ SAMFileHeader, SAMRecord, TextCigarCodec }
+import org.hammerlab.genomics.cigar.makeCigar
 import org.hammerlab.genomics.reference.test.LocusUtil
 import org.hammerlab.test.Suite
-import org.hammerlab.genomics.cigar.makeCigar
-import org.scalactic.ConversionCheckedTripleEquals
 
 class MappedReadSuite
   extends Suite
-    with ConversionCheckedTripleEquals
     with LocusUtil {
 
   test("mappedread is mapped") {

@@ -6,7 +6,6 @@ import org.bdgenomics.formats.avro.AlignmentRecord
 import org.hammerlab.genomics.bases.Bases
 import org.hammerlab.genomics.reference.Locus
 import org.scalautils.ConversionCheckedTripleEquals._
-
 /**
  * The fields in the Read trait are common to any read, whether mapped (aligned) or not.
  */
@@ -100,12 +99,14 @@ object Read extends Logging {
           record.getReadPairedFlag
         )
 
-    if (record.getReadPairedFlag) {
-      val mateAlignment = MateAlignmentProperties(record)
-      PairedRead(read, isFirstInPair = record.getFirstOfPairFlag, mateAlignment)
-    } else {
+    if (record.getReadPairedFlag)
+      PairedRead(
+        read,
+        isFirstInPair = record.getFirstOfPairFlag,
+        MateAlignmentProperties(record)
+      )
+    else
       read
-    }
   }
 
   /**

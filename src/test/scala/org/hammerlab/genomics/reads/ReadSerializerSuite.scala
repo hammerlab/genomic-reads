@@ -1,7 +1,7 @@
 package org.hammerlab.genomics.reads
 
-import org.hammerlab.spark.test.suite.{ KryoSerializerSuite, SparkSerializerSuite }
+import org.hammerlab.spark.test.suite.{ KryoSparkSuite, RDDSerialization }
 
 class ReadSerializerSuite
-  extends KryoSerializerSuite(classOf[Registrar])
-    with SparkSerializerSuite
+  extends KryoSparkSuite(classOf[Registrar])
+    with RDDSerialization

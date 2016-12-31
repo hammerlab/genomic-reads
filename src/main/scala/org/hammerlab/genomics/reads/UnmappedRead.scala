@@ -15,7 +15,7 @@ case class UnmappedRead(
     failedVendorQualityChecks: Boolean,
     isPaired: Boolean) extends Read {
 
-  assert(baseQualities.length === sequence.length.size)
+  assert(baseQualities.length === sequence.length)
 
   override val isMapped = false
   override def asMappedRead = None

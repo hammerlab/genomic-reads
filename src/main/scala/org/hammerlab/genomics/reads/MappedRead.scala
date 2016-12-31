@@ -33,7 +33,7 @@ case class MappedRead(
     with Region {
 
   assert(
-    baseQualities.length == sequence.length.size,
+    baseQualities.length == sequence.length,
     s"Base qualities have length ${baseQualities.length} but sequence has length ${sequence.length}"
   )
 

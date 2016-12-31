@@ -21,7 +21,7 @@ object MateAlignmentProperties {
       Some(
         MateAlignmentProperties(
           contigName = record.getMateReferenceName,
-          start = record.getMateAlignmentStart - 1, //subtract 1 from start, since samtools is 1-based and we're 0-based.
+          start = Locus(record.getMateAlignmentStart - 1),  //subtract 1 from start, since samtools is 1-based and we're 0-based.
           inferredInsertSize =
             if (record.getInferredInsertSize != 0)
               Some(record.getInferredInsertSize)
