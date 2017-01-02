@@ -10,9 +10,9 @@ deps ++= Seq(
   libs.value('bdg_formats),
   libs.value('genomic_utils),
   libs.value('htsjdk),
-  libs.value('loci),
-  libs.value('reference),
   libs.value('scalautils),
   libs.value('slf4j)
 )
+
+compileAndTestDeps += libs.value('reference)
 
