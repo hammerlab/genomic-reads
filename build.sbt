@@ -8,11 +8,12 @@ publishTestJar
 deps ++= Seq(
   libs.value('adam_core),
   libs.value('bdg_formats),
-  libs.value('genomic_utils),
   libs.value('htsjdk),
   libs.value('scalautils),
   libs.value('slf4j)
 )
 
-compileAndTestDeps += libs.value('reference)
-
+compileAndTestDeps ++= Seq(
+  libs.value('genomic_utils),
+  libs.value('reference)
+)

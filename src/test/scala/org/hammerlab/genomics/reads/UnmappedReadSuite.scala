@@ -1,8 +1,11 @@
 package org.hammerlab.genomics.reads
 
+import org.hammerlab.genomics.bases.BasesUtil
 import org.hammerlab.test.Suite
 
-class UnmappedReadSuite extends Suite {
+class UnmappedReadSuite
+  extends Suite
+    with BasesUtil {
 
   test("unmappedread is not mapped") {
     val read =

@@ -1,10 +1,13 @@
 package org.hammerlab.genomics.reads
 
 import htsjdk.samtools.TextCigarCodec
+import org.hammerlab.genomics.bases.BasesUtil
 import org.hammerlab.genomics.reads.Read.baseQualityStringToArray
 import org.hammerlab.genomics.reference.{ ContigName, Locus }
 
-trait ReadsUtil {
+trait ReadsUtil
+  extends BasesUtil {
+
   /**
    * Convenience function to construct a Read from unparsed values.
    */

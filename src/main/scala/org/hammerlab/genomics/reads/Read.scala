@@ -69,7 +69,7 @@ object Read extends Logging {
         val result =
           MappedRead(
             record.getReadName,
-            record.getReadString,
+            Bases(record.getReadString),
             record.getBaseQualities,
             record.getDuplicateReadFlag,
             record.getReferenceName.intern,
@@ -92,7 +92,7 @@ object Read extends Logging {
       } else
         UnmappedRead(
           record.getReadName,
-          record.getReadString,
+          Bases(record.getReadString),
           record.getBaseQualities,
           record.getDuplicateReadFlag,
           record.getReadFailsVendorQualityCheckFlag,
@@ -118,7 +118,7 @@ object Read extends Logging {
    */
   def apply(alignmentRecord: AlignmentRecord, sampleId: Int): Read = {
 
-    val sequence: Bases = alignmentRecord.getSequence
+    val sequence = Bases(alignmentRecord.getSequence)
     val baseQualities = baseQualityStringToArray(alignmentRecord.getQual, sequence.length)
 
     val referenceContig = alignmentRecord.getContigName.intern

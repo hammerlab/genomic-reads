@@ -1,12 +1,14 @@
 package org.hammerlab.genomics.reads
 
 import htsjdk.samtools.{ SAMFileHeader, SAMRecord, TextCigarCodec }
+import org.hammerlab.genomics.bases.BasesUtil
 import org.hammerlab.genomics.cigar.makeCigar
 import org.hammerlab.genomics.reference.test.LocusUtil
 import org.hammerlab.test.Suite
 
 class MappedReadSuite
   extends Suite
+    with BasesUtil
     with LocusUtil {
 
   test("mappedread is mapped") {
