@@ -2,13 +2,12 @@ package org.hammerlab.genomics.reads
 
 import htsjdk.samtools.TextCigarCodec
 import org.hammerlab.genomics.bases.BasesUtil
-import org.hammerlab.genomics.reference.test.LocusUtil
+import org.hammerlab.genomics.reference.test.LociConversions._
 import org.hammerlab.test.Suite
 
 class PairedReadSuite
   extends Suite
-    with BasesUtil
-    with LocusUtil {
+    with BasesUtil {
 
   test("unmappedread paired read is not mapped") {
     val unmappedRead =
