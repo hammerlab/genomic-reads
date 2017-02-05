@@ -1,7 +1,7 @@
 package org.hammerlab.genomics.reads
 
 import org.hammerlab.genomics.cigar._
-import org.hammerlab.genomics.reference.test.LocusUtil._
+import org.hammerlab.genomics.reference.test.LociConversions._
 
 class MappedReadSerializerSuite
   extends ReadSerializerSuite {

@@ -1,7 +1,7 @@
 package org.hammerlab.genomics.reads
 
 import htsjdk.samtools.TextCigarCodec
-import org.hammerlab.genomics.bases.BasesUtil
+import org.hammerlab.genomics.bases.{ Bases, BasesUtil }
 import org.hammerlab.genomics.reads.Read.baseQualityStringToArray
 import org.hammerlab.genomics.reference.{ ContigName, Locus }
 
@@ -11,7 +11,7 @@ trait ReadsUtil
   /**
    * Convenience function to construct a Read from unparsed values.
    */
-  private def read(sequence: String,
+  private def read(sequence: Bases,
                    name: String,
                    baseQualities: String = "",
                    isDuplicate: Boolean = false,
@@ -41,12 +41,12 @@ trait ReadsUtil
     )
   }
 
-  def makeRead(sequence: String,
+  def makeRead(sequence: Bases,
                cigar: String,
                qualityScores: Seq[Int]): MappedRead =
     makeRead(sequence, cigar, qualityScores = Some(qualityScores))
 
-  def makeRead(sequence: String,
+  def makeRead(sequence: Bases,
                cigar: String,
                start: Int,
                chr: ContigName,
@@ -59,7 +59,7 @@ trait ReadsUtil
       qualityScores = Some(qualityScores)
     )
 
-  def makeRead(sequence: String,
+  def makeRead(sequence: Bases,
                cigar: String = "",
                start: Int = 1,
                chr: ContigName = "chr1",
