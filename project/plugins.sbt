@@ -1,1 +1,1 @@
-addSbtPlugin("org.hammerlab" % "sbt-parent" % "1.6.2")
+addSbtPlugin("org.hammerlab" % "sbt-parent" % "1.6.3")
