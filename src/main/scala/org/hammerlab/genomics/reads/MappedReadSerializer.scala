@@ -4,7 +4,7 @@ import com.esotericsoftware.kryo.io.{ Input, Output }
 import com.esotericsoftware.kryo.{ Kryo, Serializer }
 import htsjdk.samtools.TextCigarCodec
 import org.hammerlab.genomics.bases.Bases
-import org.hammerlab.genomics.reference.Locus
+import org.hammerlab.genomics.reference.{ ContigName, Locus }
 import org.scalautils.ConversionCheckedTripleEquals._
 
 class MappedReadSerializer extends Serializer[MappedRead] {
@@ -15,7 +15,7 @@ class MappedReadSerializer extends Serializer[MappedRead] {
     kryo.writeObject(output, obj.sequence)
     output.writeBytes(obj.baseQualities.toArray)
     output.writeBoolean(obj.isDuplicate)
-    output.writeString(obj.contigName.name)
+    kryo.writeObject(output, obj.contigName)
     output.writeInt(obj.alignmentQuality, true)
     output.writeLong(obj.start.locus, true)
     output.writeString(obj.cigar.toString)
@@ -29,7 +29,7 @@ class MappedReadSerializer extends Serializer[MappedRead] {
     val sequence = kryo.readObject[Bases](input, classOf[Bases])
     val qualityScoresArray: IndexedSeq[Byte] = input.readBytes(sequence.length).toVector
     val isDuplicate = input.readBoolean()
-    val referenceContig = input.readString().intern()
+    val contigName = kryo.readObject(input, classOf[ContigName])
     val alignmentQuality = input.readInt(true)
     val start = input.readLong(true)
     val cigarString = input.readString()
@@ -44,7 +44,7 @@ class MappedReadSerializer extends Serializer[MappedRead] {
       sequence,
       qualityScoresArray,
       isDuplicate,
-      referenceContig,
+      contigName,
       alignmentQuality,
       Locus(start),
       cigar,
