@@ -4,7 +4,7 @@ import grizzled.slf4j.Logging
 import htsjdk.samtools._
 import org.bdgenomics.formats.avro.AlignmentRecord
 import org.hammerlab.genomics.bases.Bases
-import org.hammerlab.genomics.reference.Locus
+import org.hammerlab.genomics.reference.{ ContigName, Locus }
 import org.scalautils.ConversionCheckedTripleEquals._
 /**
  * The fields in the Read trait are common to any read, whether mapped (aligned) or not.
@@ -55,7 +55,7 @@ object Read extends Logging {
   /**
    * Convert a SAM tools record into a Read.
    */
-  def apply(record: SAMRecord): Read = {
+  def apply(record: SAMRecord)(implicit cf: ContigName.Factory): Read = {
 
     val isMapped =
       !record.getReadUnmappedFlag &&
@@ -72,7 +72,7 @@ object Read extends Logging {
             Bases(record.getReadString),
             record.getBaseQualities,
             record.getDuplicateReadFlag,
-            record.getReferenceName.intern,
+            record.getReferenceName,
             record.getMappingQuality,
             // SAM loci are 1-indexed
             Locus(record.getAlignmentStart - 1),
@@ -116,12 +116,12 @@ object Read extends Logging {
    * @param alignmentRecord ADAM Alignment Record (an aligned or unaligned read)
    * @return Mapped or Unmapped Read
    */
-  def apply(alignmentRecord: AlignmentRecord, sampleId: Int): Read = {
+  def apply(alignmentRecord: AlignmentRecord, sampleId: Int)(implicit cf: ContigName.Factory): Read = {
 
     val sequence = Bases(alignmentRecord.getSequence)
     val baseQualities = baseQualityStringToArray(alignmentRecord.getQual, sequence.length)
 
-    val referenceContig = alignmentRecord.getContigName.intern
+    val referenceContig = ContigName(alignmentRecord.getContigName)
     val cigar = TextCigarCodec.decode(alignmentRecord.getCigar)
 
     val read =

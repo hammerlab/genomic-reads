@@ -16,7 +16,7 @@ case class MateAlignmentProperties(contigName: ContigName,
                                    isPositiveStrand: Boolean)
 
 object MateAlignmentProperties {
-  def apply(record: SAMRecord): Option[MateAlignmentProperties] =
+  def apply(record: SAMRecord)(implicit cf: ContigName.Factory): Option[MateAlignmentProperties] =
     if (!record.getMateUnmappedFlag)
       Some(
         MateAlignmentProperties(
