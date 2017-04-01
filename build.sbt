@@ -1,6 +1,6 @@
 organization := "org.hammerlab.genomics"
 name := "reads"
-version := "1.0.3"
+version := "1.0.4-SNAPSHOT"
 
 addSparkDeps
 publishTestJar
