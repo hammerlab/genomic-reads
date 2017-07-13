@@ -6,16 +6,16 @@ addSparkDeps
 publishTestJar
 
 deps ++= Seq(
-  libs.value('adam_core).copy(revision = "0.23.2-SNAPSHOT"),
-  libs.value('bdg_formats),
-  libs.value('htsjdk),
-  libs.value('scalautils),
-  libs.value('slf4j)
+  adam % "0.23.2-SNAPSHOT",
+  bdg_formats,
+  htsjdk,
+  scalautils,
+  slf4j
 )
 
 testUtilsVersion := "1.2.4-SNAPSHOT"
 
 compileAndTestDeps ++= Seq(
-  libs.value('genomic_utils),
-  libs.value('reference)
+  genomic_utils % "1.2.3",
+  reference % "1.3.1-SNAPSHOT"
 )
