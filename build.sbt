@@ -16,6 +16,6 @@ deps ++= Seq(
 testUtilsVersion := "1.2.4-SNAPSHOT"
 
 compileAndTestDeps ++= Seq(
-  genomic_utils % "1.2.3",
-  reference % "1.3.1-SNAPSHOT"
+  genomic_utils % "1.3.0-SNAPSHOT",
+  reference % "1.4.0-SNAPSHOT"
 )
