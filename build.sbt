@@ -1,6 +1,6 @@
 organization := "org.hammerlab.genomics"
 name := "reads"
-version := "1.0.6-SNAPSHOT"
+version := "1.0.6"
 
 addSparkDeps
 publishTestJar
@@ -14,6 +14,6 @@ deps ++= Seq(
 )
 
 compileAndTestDeps ++= Seq(
-  genomic_utils % "1.3.0",
+  genomic_utils % "1.3.1",
   reference % "1.4.0"
 )
