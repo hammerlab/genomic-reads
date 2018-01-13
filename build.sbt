@@ -1,7 +1,7 @@
 organization := "org.hammerlab.genomics"
 name := "reads"
 version := "1.0.6"
-
+github.repo("genomic-reads")
 addSparkDeps
 publishTestJar
 
