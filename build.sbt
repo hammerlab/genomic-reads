@@ -1,19 +1,16 @@
-organization := "org.hammerlab.genomics"
-name := "reads"
-version := "1.0.6"
+subgroup("genomics", "reads")
+v"1.0.7"
 github.repo("genomic-reads")
 addSparkDeps
 publishTestJar
 
-deps ++= Seq(
-  adam % "0.23.2",
+import genomics.{ reference, utils }
+dep(
+         adam % "0.23.2",
   bdg_formats,
-  htsjdk,
-  scalautils,
-  slf4j
-)
-
-compileAndTestDeps ++= Seq(
-  genomic_utils % "1.3.1",
-  reference % "1.4.0"
+       htsjdk,
+    reference % "1.4.3" +testtest,
+   scalautils,
+        slf4j,
+        utils % "1.3.1" +testtest
 )
