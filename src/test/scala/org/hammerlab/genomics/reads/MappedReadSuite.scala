@@ -57,8 +57,8 @@ class MappedReadSuite
       )
 
     val collectionMappedReads: Seq[Read] = Seq(uread, mread)
-    collectionMappedReads(0).isMapped should ===(false)
-    collectionMappedReads(1).isMapped should ===(true)
+    ==(collectionMappedReads(0).isMapped, false)
+    ==(collectionMappedReads(1).isMapped, true)
   }
 
   test("unclippedStart/End") {
@@ -72,7 +72,7 @@ class MappedReadSuite
 
     val read = Read(record).asMappedRead.get
 
-    read.unclippedStart should ===(117)
-    read.unclippedEnd should ===(137)
+    ==(read.unclippedStart, 117)
+    ==(read.unclippedEnd,   137)
   }
 }

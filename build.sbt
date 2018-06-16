@@ -1,16 +1,16 @@
 subgroup("genomics", "reads")
 v"1.0.7"
 github.repo("genomic-reads")
-addSparkDeps
+spark
 publishTestJar
 
 import genomics.{ reference, utils }
 dep(
-         adam % "0.23.2",
-  bdg_formats,
+         adam % "0.23.4",
+  bdg.formats,
        htsjdk,
-    reference % "1.4.3" +testtest,
+    reference % "1.5.0" +testtest,
    scalautils,
         slf4j,
-        utils % "1.3.1" +testtest
+        utils % "1.3.2" +testtest
 )
